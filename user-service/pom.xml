@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.alienlines</groupId>
-    <artifactId>authuser-service</artifactId>
+    <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>authuser-service</name>
     <description>authuser-service</description>
