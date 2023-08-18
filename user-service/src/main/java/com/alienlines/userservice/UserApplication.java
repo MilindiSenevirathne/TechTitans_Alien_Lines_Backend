@@ -1,4 +1,4 @@
-package com.alienlines.bookingservice.userservice;
+package com.alienlines.userservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
