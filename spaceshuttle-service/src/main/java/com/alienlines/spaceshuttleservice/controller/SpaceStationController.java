@@ -2,6 +2,7 @@ package com.alienlines.spaceshuttleservice.controller;
 
 import com.alienlines.spaceshuttleservice.model.SpaceStation;
 import com.alienlines.spaceshuttleservice.service.ISpaceStationService;
+import com.alienlines.spaceshuttleservice.util.ErrorResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class SpaceStationController {
             List<SpaceStation> spaceStationList = spaceStationService.getSpaceStations(searchText);
             return new ResponseEntity<>(spaceStationList, HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ErrorResponseUtil.errorResponse(ex);
         }
     }
 }
