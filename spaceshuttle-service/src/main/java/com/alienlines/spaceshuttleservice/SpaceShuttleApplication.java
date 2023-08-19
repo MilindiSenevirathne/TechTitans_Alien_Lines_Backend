@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpaceshuttleApplication {
+public class SpaceShuttleApplication {
 
-    public static void main(String[] args) {SpringApplication.run(SpaceshuttleApplication.class, args);
+    public static void main(String[] args) {SpringApplication.run(SpaceShuttleApplication.class, args);
     }
 
 }
