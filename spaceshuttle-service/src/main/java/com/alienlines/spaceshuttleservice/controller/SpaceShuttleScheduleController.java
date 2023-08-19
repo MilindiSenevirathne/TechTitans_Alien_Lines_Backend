@@ -39,12 +39,12 @@ public class SpaceShuttleScheduleController {
             @RequestParam(required = false) Boolean isSearchByRoute,
             @RequestParam(required = false) String shuttleId,
             @RequestParam(required = false) String shuttleDate,
-            @RequestParam(required = false) Long destinationId,
+            @RequestParam(required = false) Long departureId,
             @RequestParam(required = false) Long arrivalId
     ) {
 
         try {
-            List<SpaceShuttleSchedule> spaceShuttleScheduleList = spaceShuttleScheduleService.getSpaceShuttleStatus(isSearchByRoute, shuttleId, shuttleDate, destinationId, arrivalId);
+            List<SpaceShuttleSchedule> spaceShuttleScheduleList = spaceShuttleScheduleService.getSpaceShuttleStatus(isSearchByRoute, shuttleId, shuttleDate, departureId, arrivalId);
             return new ResponseEntity<>(spaceShuttleScheduleList, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -56,13 +56,13 @@ public class SpaceShuttleScheduleController {
             @RequestParam(required = false) String shuttleType,
             @RequestParam(required = false) Integer passengerCount,
             @RequestParam(required = false) String departureDate,
-            @RequestParam(required = false) Long destinationId,
+            @RequestParam(required = false) Long departureId,
             @RequestParam(required = false) String arrivalDate,
             @RequestParam(required = false) Long arrivalId
     ) {
 
         try {
-            SpaceShuttleSearchDto spaceShuttleSearchDto = spaceShuttleScheduleService.searchSpaceShuttles(shuttleType, passengerCount, departureDate, destinationId, arrivalDate, arrivalId);
+            SpaceShuttleSearchDto spaceShuttleSearchDto = spaceShuttleScheduleService.searchSpaceShuttles(shuttleType, passengerCount, departureDate, departureId, arrivalDate, arrivalId);
             return new ResponseEntity<>(spaceShuttleSearchDto, HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

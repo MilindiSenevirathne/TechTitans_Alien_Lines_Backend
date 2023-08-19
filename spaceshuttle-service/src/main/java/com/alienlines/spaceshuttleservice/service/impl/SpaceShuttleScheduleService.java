@@ -27,11 +27,11 @@ public class SpaceShuttleScheduleService implements ISpaceShuttleScheduleService
     }
 
     @Override
-    public List<SpaceShuttleSchedule> getSpaceShuttleStatus(Boolean isSearchByRoute, String shuttleId, String shuttleDate, Long destinationId, Long arrivalId) throws Exception {
+    public List<SpaceShuttleSchedule> getSpaceShuttleStatus(Boolean isSearchByRoute, String shuttleId, String shuttleDate, Long departureId, Long arrivalId) throws Exception {
 
         if(isSearchByRoute){
-            if(destinationId == null){
-                throw new Exception("Destination ID is required.");
+            if(departureId == null){
+                throw new Exception("Departure ID is required.");
             }
 
             if(arrivalId == null){
@@ -51,7 +51,7 @@ public class SpaceShuttleScheduleService implements ISpaceShuttleScheduleService
             LocalDate parsedDate = LocalDate.parse(shuttleDate, dateFormatter);
 
             if(isSearchByRoute){
-                return spaceShuttleScheduleRepository.searchSpaceShuttleSchedulesByRoute(parsedDate.format(dateFormatter), destinationId, arrivalId);
+                return spaceShuttleScheduleRepository.searchSpaceShuttleSchedulesByRoute(parsedDate.format(dateFormatter), departureId, arrivalId);
             }
             return spaceShuttleScheduleRepository.searchSpaceShuttleSchedulesByFlight(shuttleId, parsedDate.format(dateFormatter));
         } catch (DateTimeParseException e) {
@@ -62,12 +62,12 @@ public class SpaceShuttleScheduleService implements ISpaceShuttleScheduleService
     }
 
     @Override
-    public SpaceShuttleSearchDto searchSpaceShuttles(String shuttleType, Integer passengerCount, String departureDate, Long destinationId, String arrivalDate, Long arrivalId) throws Exception {
+    public SpaceShuttleSearchDto searchSpaceShuttles(String shuttleType, Integer passengerCount, String departureDate, Long departureId, String arrivalDate, Long arrivalId) throws Exception {
 
         if(shuttleType == null || shuttleType.isEmpty()){ throw new Exception("Shuttle Type is required.");}
         if(passengerCount == null){ throw new Exception("Passenger Count is required.");}
-        if(destinationId == null){ throw new Exception("Destination ID is required.");}
-        if(arrivalId == null){ throw new Exception("Arrival ID is required.");}
+        if(departureId == null){ throw new Exception("Departure Station ID is required.");}
+        if(arrivalId == null){ throw new Exception("Arrival Station ID is required.");}
         if(departureDate == null || departureDate.isEmpty()){ throw new Exception("Departure Date is required.");}
         if(arrivalDate == null || arrivalDate.isEmpty()){ throw new Exception("Arrival Date is required.");}
 
@@ -77,8 +77,8 @@ public class SpaceShuttleScheduleService implements ISpaceShuttleScheduleService
 
             SpaceShuttleSearchDto spaceShuttleSearchDto = new SpaceShuttleSearchDto();
 
-            List<SpaceShuttleSchedule> departureSpaceShuttleScheduleList = spaceShuttleScheduleRepository.searchSpaceShuttleSchedules(shuttleType, passengerCount, parsedDepartureDate.format(dateFormatter), destinationId, arrivalId);
-            List<SpaceShuttleSchedule> arrivalSpaceShuttleScheduleList = spaceShuttleScheduleRepository.searchSpaceShuttleSchedules(shuttleType, passengerCount, parsedArrivalDate.format(dateFormatter), arrivalId, destinationId);
+            List<SpaceShuttleSchedule> departureSpaceShuttleScheduleList = spaceShuttleScheduleRepository.searchSpaceShuttleSchedules(shuttleType, passengerCount, parsedDepartureDate.format(dateFormatter), departureId, arrivalId);
+            List<SpaceShuttleSchedule> arrivalSpaceShuttleScheduleList = spaceShuttleScheduleRepository.searchSpaceShuttleSchedules(shuttleType, passengerCount, parsedArrivalDate.format(dateFormatter), arrivalId, departureId);
 
             spaceShuttleSearchDto.setDepartureList(departureSpaceShuttleScheduleList);
             spaceShuttleSearchDto.setArrivalList(arrivalSpaceShuttleScheduleList);
