@@ -1,4 +1,4 @@
-package com.alienlines.userservice.dao;
+package com.alienlines.userservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
