@@ -24,7 +24,7 @@ public class SpaceStationService implements ISpaceStationService {
             if(searchText == null || searchText.isEmpty()){
                 return spaceStationRepository.findAll();
             }
-            return spaceStationRepository.searchSpaceStations(searchText);
+            return spaceStationRepository.searchSpaceStations(searchText.toLowerCase());
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
