@@ -22,7 +22,7 @@ public class SpaceStationService implements ISpaceStationService {
     public List<SpaceStation> getSpaceStations(String searchText) throws Exception {
         try {
             if(searchText == null || searchText.isEmpty()){
-                return spaceStationRepository.findAll();
+                return spaceStationRepository.getSpaceStations();
             }
             return spaceStationRepository.searchSpaceStations(searchText.toLowerCase());
         } catch (Exception e){

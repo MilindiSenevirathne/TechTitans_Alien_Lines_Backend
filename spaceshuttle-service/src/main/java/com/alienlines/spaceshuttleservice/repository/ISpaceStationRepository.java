@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface ISpaceStationRepository extends JpaRepository<SpaceStation, Long> {
 
-    @Query(value = "SELECT * FROM space_station WHERE LOWER(name) LIKE %:searchText% or LOWER (planet) LIKE %:searchText%", nativeQuery = true)
+    @Query(value = "SELECT * FROM space_station WHERE LOWER(name) LIKE %:searchText% or LOWER (planet) LIKE %:searchText% LIMIT 10", nativeQuery = true)
     List<SpaceStation> searchSpaceStations(String searchText);
+
+    @Query(value = "SELECT * FROM space_station ORDER BY name DESC LIMIT 10", nativeQuery = true)
+    List<SpaceStation> getSpaceStations();
 }
