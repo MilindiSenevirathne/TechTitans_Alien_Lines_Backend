@@ -1,10 +1,13 @@
 package com.alienlines.bookingservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 
@@ -26,6 +29,12 @@ public class Passenger {
     private String doc_no;
     private String email;
     private String phone_no;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name="booking_id", nullable=false)
+    private Booking booking;
+
 
 
 }
