@@ -1,14 +1,10 @@
 package com.alienlines.userservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name="wallet")
@@ -23,4 +19,7 @@ public class Wallet {
     private Long id;
     private Double balance;
     private String currency;
+
+    @OneToOne(mappedBy = "wallet")
+    private User user;
 }

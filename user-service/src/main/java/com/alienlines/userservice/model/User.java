@@ -1,19 +1,15 @@
 package com.alienlines.userservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,5 +28,10 @@ public class User {
     private String doc_no;
     private String email;
     private String phone_no;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+    private Wallet wallet;
+
 
 }
