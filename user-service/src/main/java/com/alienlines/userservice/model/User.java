@@ -23,11 +23,9 @@ public class User {
     private String name;
     private String surename;
     private Date dob;
-    private String nationality;
-    private String doc_type;
-    private String doc_no;
     private String email;
     private String phone_no;
+    private String address;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", referencedColumnName = "id")
