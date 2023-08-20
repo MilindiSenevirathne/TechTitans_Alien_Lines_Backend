@@ -1,10 +1,14 @@
 package com.alienlines.userservice.controller;
 
-import com.alienlines.userservice.dao.RegisterUser;
+import com.alienlines.userservice.dto.RegisterUser;
+import com.alienlines.userservice.dto.UpdateUserRequest;
+import com.alienlines.userservice.dto.WalletInfoDTO;
 import com.alienlines.userservice.model.User;
 import com.alienlines.userservice.service.UserService;
+import com.alienlines.userservice.util.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,4 +24,50 @@ public class UserController {
         userService.registerUser(registerUser);
         return "User created Successfully!";
     }
+
+    @DeleteMapping("/{userId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String deleteUser(@PathVariable Long userId) {
+        try {
+            userService.deleteUser(userId);
+            return "User and associated wallet deleted Successfully!";
+        } catch (UserNotFoundException e) {
+            return e.toString();
+        }
+    }
+
+    @PutMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public String updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequest updateUserRequest) {
+        try {
+            userService.updateUser(userId, updateUserRequest);
+            return "User updated successfully!";
+        } catch (UserNotFoundException e) {
+            return "User not found with provided ID";
+        }
+    }
+
+    @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        try {
+            User user = userService.getUserById(userId);
+            return ResponseEntity.ok(user);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{userId}/wallet")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<WalletInfoDTO> getWalletInfoByUserId(@PathVariable Long userId) {
+        try {
+            WalletInfoDTO walletInfo = userService.getWalletInfoByUserId(userId);
+            return ResponseEntity.ok(walletInfo);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

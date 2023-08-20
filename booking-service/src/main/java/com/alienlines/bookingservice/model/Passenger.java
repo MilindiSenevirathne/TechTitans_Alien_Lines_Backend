@@ -1,4 +1,4 @@
-package com.alienlines.userservice.model;
+package com.alienlines.bookingservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,32 +6,35 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 
 @Entity
-@Table(name="users")
+@Table(name = "passenger")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String img_url;
     private String name;
     private String surename;
     private Date dob;
+    private String nationality;
+    private String doc_type;
+    private String doc_no;
     private String email;
     private String phone_no;
-    private String address;
 
+    @ManyToOne
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
-    private Wallet wallet;
+    @JoinColumn(name="booking_id", nullable=false)
+    private Booking booking;
+
 
 
 }
