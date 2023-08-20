@@ -11,16 +11,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "space_shuttle_schedule_rate")
-public class SpaceShuttleScheduleRate {
+@Table(name = "space_shuttle_schedule_service")
+public class SpaceShuttleScheduleService {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 100)
+    @Column(name = "service_name", length = 100)
     private String name;
+
+    @Column(name = "service_description", length = 1000)
+    private String description;
 
     @Column(name = "price")
     private Double price;

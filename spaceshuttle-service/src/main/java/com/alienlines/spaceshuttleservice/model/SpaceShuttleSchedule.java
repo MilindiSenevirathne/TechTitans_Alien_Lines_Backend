@@ -18,6 +18,7 @@ import java.util.List;
 public class SpaceShuttleSchedule {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "departure_date_time")
@@ -41,4 +42,8 @@ public class SpaceShuttleSchedule {
     @OneToMany
     @JoinColumn(name = "space_shuttle_schedule_id", insertable = false, updatable = false)
     private List<SpaceShuttleScheduleRate> spaceShuttleScheduleRates;
+
+    @OneToMany
+    @JoinColumn(name = "space_shuttle_schedule_id", insertable = false, updatable = false)
+    private List<SpaceShuttleScheduleService> spaceShuttleScheduleServices;
 }
