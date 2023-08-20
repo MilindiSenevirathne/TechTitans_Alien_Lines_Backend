@@ -3,9 +3,11 @@ package com.alienlines.userservice.controller;
 import com.alienlines.userservice.dto.RegisterUser;
 import com.alienlines.userservice.dto.UpdateUserRequest;
 import com.alienlines.userservice.dto.WalletInfoDTO;
+import com.alienlines.userservice.dto.WalletUpdateReqDTO;
 import com.alienlines.userservice.model.User;
 import com.alienlines.userservice.service.UserService;
 import com.alienlines.userservice.util.UserNotFoundException;
+import com.alienlines.userservice.util.WalletNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,4 +72,13 @@ public class UserController {
     }
 
 
+    @PutMapping("/{userId}/wallet")
+    public ResponseEntity<String> updateWalletByUserId(@PathVariable Long userId, @RequestBody WalletUpdateReqDTO updateRequest) {
+        try {
+            userService.updateWalletbyUserId(userId, updateRequest);
+            return ResponseEntity.ok("Wallet updated successfully");
+        } catch (UserNotFoundException | WalletNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

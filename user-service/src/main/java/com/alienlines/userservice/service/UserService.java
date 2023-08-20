@@ -3,6 +3,7 @@ package com.alienlines.userservice.service;
 import com.alienlines.userservice.dto.RegisterUser;
 import com.alienlines.userservice.dto.UpdateUserRequest;
 import com.alienlines.userservice.dto.WalletInfoDTO;
+import com.alienlines.userservice.dto.WalletUpdateReqDTO;
 import com.alienlines.userservice.model.User;
 import com.alienlines.userservice.model.Wallet;
 import com.alienlines.userservice.repository.UserRepository;
@@ -73,7 +74,6 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Update fields from the DAO
             user.setImg_url(updateUserRequest.getImg_url());
             user.setName(updateUserRequest.getName());
             user.setSurename(updateUserRequest.getSurename());
@@ -118,6 +118,28 @@ public class UserService {
         } else {
             throw new UserNotFoundException("User with ID " + userId + " not found");
         }
+    }
+
+    public void updateWalletbyUserId(Long userId, WalletUpdateReqDTO walletUpdateReqDTO) throws UserNotFoundException {
+
+        WalletInfoDTO userWallet = new WalletInfoDTO();
+        userWallet = getWalletInfoByUserId(userId);
+
+        Optional<Wallet> walletOptional = walletRepository.findById(userWallet.getWalletId());
+
+        if (walletOptional.isPresent()) {
+            Wallet wallet = walletOptional.get();
+
+            wallet.setBalance(walletUpdateReqDTO.getBalance());
+            wallet.setCurrency(walletUpdateReqDTO.getCurrency());
+
+            walletRepository.save(wallet);
+            log.info("Wallet of User {} updated successfully", userId);
+        } else {
+            throw new UserNotFoundException("User with ID " + userId + " not found");
+        }
+
+
     }
 
 }
