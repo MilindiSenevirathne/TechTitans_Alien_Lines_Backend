@@ -71,8 +71,11 @@ public class BookingService {
         booking.setDep_date(bookingRequestDTO.getDep_date());
         booking.setReturn_date(bookingRequestDTO.getReturn_date());
         booking.setJourney_rate(bookingRequestDTO.getJourney_rate());
+        booking.setPrice_extrabaggage(bookingRequestDTO.getPrice_extrabaggage());
+        booking.setSeats(bookingRequestDTO.getSeats());
+        booking.setMeals(bookingRequestDTO.getMeals());
+        booking.setAssistance(bookingRequestDTO.getAssistance());
         booking.setTotal_price(bookingRequestDTO.getTotal_price());
-        booking.setServices(bookingRequestDTO.getServices());
 
         Booking bookingDb = bookingRepository.save(booking);
 

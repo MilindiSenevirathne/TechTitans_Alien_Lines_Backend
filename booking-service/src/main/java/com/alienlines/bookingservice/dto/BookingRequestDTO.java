@@ -20,7 +20,10 @@ public class BookingRequestDTO {
     private Date dep_date;
     private Date return_date;
     private Double journey_rate;
+    private Double price_extrabaggage;
+    private List<String> seats;
+    private List<String> meals;
+    private List<String> assistance;
     private Double total_price;
-    private List<String> services;
     private List<PassengerRequestDTO> passengers;
 }
